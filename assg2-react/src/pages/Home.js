@@ -1,20 +1,32 @@
 import Nav from '../components/Nav'
+import AuthModal from '../components/AuthModal'
+import {useState} from 'react'
 const Home = () => {
 
-    const authToken = true
+    const [showModal, setShowModal] = useState(false)
+
+    const authToken = false
 
     const handleClick = () => {
         console.log("clicked")
+        setShowModal(true)
+
     }
+
     return (
-        <>
-        <Nav/>
+        <div className= "overlay">
+        <Nav minimal={false} authToken={authToken}/>
         <div className="Home">
-            <h1>Meet your Duo</h1>
+            <h1>Meet Your Duo</h1>
             <button className="primary-button" onClick={handleClick}>
-                {authToken ? 'Sign Out' : "Create Account"} </button>
+                {authToken ? 'Sign Out' : "Create Account"} 
+            </button>
+            {showModal && (
+                <AuthModal setShowModal = {setShowModal}/>
+
+            )}
         </div>
-        </>
+        </div>
     )
 }
 export default Home
